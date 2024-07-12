@@ -14,11 +14,9 @@ This project is a mobile app built with Flutter that allows Star Wars fans to br
 - 📝 **Detailed Information**: Display text and images for each item.
 - ⚡ **Responsive Design**: Optimized for performance and responsiveness.
 - 💾 **Local Storage**: Save favorite items or cache data for offline access.
-- ✅ **Unit Testing**: Includes unit tests for state management logic and widget tests for UI components.
+ 
 
 ## 🚀 Optional Features
-- 🎙️ **Voice Commands**
-- 📲 **Social Media Integration**
 - 🌐 **Personalized Content Recommendations**
 
 ## 🛠️ Setup Instructions
@@ -30,8 +28,7 @@ This project is a mobile app built with Flutter that allows Star Wars fans to br
 ### 📥 Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/star-wars-fan-app.git
-   cd star-wars-fan-app
+   git clone https://github.com/islamwahiedwork/star-wars-fan.git
    ```
 2. Get dependencies:
    ```bash
