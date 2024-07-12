@@ -28,8 +28,7 @@ This project is a mobile app built with Flutter that allows Star Wars fans to br
 ### 📥 Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/star-wars-fan-app.git
-   cd star-wars-fan-app
+   git clone https://github.com/islamwahiedwork/star-wars-fan.git
    ```
 2. Get dependencies:
    ```bash
