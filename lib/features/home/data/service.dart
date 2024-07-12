@@ -17,7 +17,7 @@ class StartWarsService {
     try {
       Response response =
           await _dioService.getRequest(path: "", queryParameters: {});
-      print(response.data);
+
       if (response.statusCode == 200) {
         return Categories.fromJson(response.data);
       } else {
