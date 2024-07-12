@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:star_wars_app/core/utils/global.dart';
@@ -47,6 +46,7 @@ class HomeCubit extends Cubit<HomeInitState> {
   Future<void> _init() async {
     _preferences = await SharedPreferences.getInstance();
     await _loadDataFromPreferences();
+    refreshDataSearchResultsCount();
   }
 
   int currentTabIndex = 0;
