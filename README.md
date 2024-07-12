@@ -17,6 +17,7 @@ This project is a mobile app built with Flutter that allows Star Wars fans to br
  
 
 ## 🚀 Optional Features
+- 🎙️ **Voice Commands**
 - 🌐 **Personalized Content Recommendations**
 
 ## 🛠️ Setup Instructions
