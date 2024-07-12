@@ -13,9 +13,11 @@ class StartWarsService {
   final DioService _dioService = DioService();
 
   Future<Categories> getStarWarsRootWS() async {
+    print("getStarWarsRootWS");
     try {
       Response response =
           await _dioService.getRequest(path: "", queryParameters: {});
+      print(response.data);
       if (response.statusCode == 200) {
         return Categories.fromJson(response.data);
       } else {

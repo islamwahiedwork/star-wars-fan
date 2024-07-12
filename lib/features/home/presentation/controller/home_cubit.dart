@@ -14,9 +14,7 @@ import 'package:star_wars_app/features/home/data/service.dart';
 import 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeInitState> {
-  HomeCubit() : super(HomeInitState()) {
-    _init();
-  }
+  HomeCubit() : super(HomeInitState());
 
   static HomeCubit get(context) => BlocProvider.of(context);
   late SharedPreferences _preferences;
@@ -43,7 +41,7 @@ class HomeCubit extends Cubit<HomeInitState> {
   );
 
   // Initialize SharedPreferences instance and save empty lists
-  Future<void> _init() async {
+  Future<void> init() async {
     _preferences = await SharedPreferences.getInstance();
     await _loadDataFromPreferences();
     refreshDataSearchResultsCount();
@@ -87,6 +85,8 @@ class HomeCubit extends Cubit<HomeInitState> {
     String? categoriesJson = _preferences.getString(_categoriesKey);
     if (categoriesJson != null) {
       categories = Categories.fromJson(jsonDecode(categoriesJson));
+    }else{
+      getStarWarsCategories();
     }
 
     String? peopleJson = _preferences.getString(_peopleKey);
@@ -95,13 +95,18 @@ class HomeCubit extends Cubit<HomeInitState> {
           jsonDecode(peopleJson).map((x) => StarWarsCharacter.fromJson(x)));
       listStarWarsCharacterMaster = listStarWarsCharacter.toList();
     }
-
+     else{
+       getStarWarsPeople();
+     }
     String? planetsJson = _preferences.getString(_planetsKey);
     if (planetsJson != null) {
       listPlanets = List<Planet>.from(
           jsonDecode(planetsJson).map((x) => Planet.fromJson(x)));
 
       listPlanetsMaster = listPlanets.toList();
+    }
+    else{
+      getStarWarsPlanets();
     }
 
     String? filmsJson = _preferences.getString(_filmsKey);
@@ -110,6 +115,10 @@ class HomeCubit extends Cubit<HomeInitState> {
           List<Film>.from(jsonDecode(filmsJson).map((x) => Film.fromJson(x)));
       listFilmsMaster = listFilms.toList();
     }
+    else{
+      getStarWarsFilms();
+    }
+
 
     String? speciesJson = _preferences.getString(_speciesKey);
     if (speciesJson != null) {
@@ -117,6 +126,11 @@ class HomeCubit extends Cubit<HomeInitState> {
           jsonDecode(speciesJson).map((x) => Species.fromJson(x)));
       listSpeciesMaster = listSpecies.toList();
     }
+    else{
+      getStarWarsSpecies();
+    }
+
+
 
     String? starshipsJson = _preferences.getString(_starshipsKey);
     if (starshipsJson != null) {
@@ -124,12 +138,19 @@ class HomeCubit extends Cubit<HomeInitState> {
           jsonDecode(starshipsJson).map((x) => Starship.fromJson(x)));
       listStarshipsMaster = listStarships.toList();
     }
+    else{
+      getStarWarsStarships();
+    }
 
     String? vehiclesJson = _preferences.getString(_vehiclesKey);
     if (vehiclesJson != null) {
       listVehicles = List<Vehicle>.from(
           jsonDecode(vehiclesJson).map((x) => Vehicle.fromJson(x)));
       listVehiclesMaster = listVehicles.toList();
+    }
+
+    else{
+      getStarWarsVehicles();
     }
 
     _getFavorites();

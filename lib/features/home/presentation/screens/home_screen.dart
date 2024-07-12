@@ -119,7 +119,12 @@ class HomeScreen extends StatelessWidget {
     final homeCubit = HomeCubit.get(context);
 
     Future<void> refreshData() async {
-      Global.txtSearchController.clear();
+      try{
+        Global.txtSearchController.clear();
+      }catch (e){
+        print(e);
+      }
+
       switch (category) {
         case AppString.character:
           homeCubit
