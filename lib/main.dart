@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(lazy: false,create: (context) => HomeCubit()),
+        BlocProvider(lazy: false,create: (context) => HomeCubit()..loadDataFromServer()),
       ],
       child: MaterialApp(
         theme: ThemeData.dark(
