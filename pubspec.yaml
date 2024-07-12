@@ -23,6 +23,7 @@ dependencies:
   flutter_staggered_animations: ^1.1.1
   shared_preferences: ^2.2.3
   substring_highlight: ^1.0.33
+  speech_to_text: ^6.6.2
 
 dev_dependencies:
   flutter_test:

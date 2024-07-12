@@ -1,4 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Add the RECORD_AUDIO permission here -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
     <application
         android:label="@string/appName"
         android:name="${applicationName}"

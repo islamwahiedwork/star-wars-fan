@@ -22,76 +22,94 @@ class HomeScreen extends StatelessWidget {
       listener: (context, state) {},
       builder: (context, state) {
         var homeCubit = HomeCubit.get(context);
-        return Scaffold(
-          extendBody: true,
-          body: Column(
-            children: [
-              const SizedBox(height: 10),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: SearchBox(txtSearchController: Global.txtSearchController,
-                  onChanged: (String value ) {
-                  homeCubit.getSearchResults();
-                },),
-              ),
-              Padding(
-                padding: const EdgeInsets.only( right: 20,top : 20,left: 20,),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text('Results'),
-                    Text('(${homeCubit.searchResultsCount.toString()})', style: const TextStyle(color: Colors.blue),),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 10),
-              Expanded(
-                child: NestedScrollView(
-                  headerSliverBuilder: (context, innerBoxIsScrolled) {
-                    return [
-                      SliverOverlapAbsorber(
-                        handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                            context),
-                        sliver: SliverAppBar(
-                          automaticallyImplyLeading: false,
-                          expandedHeight: 150.0,
-                          flexibleSpace: FlexibleSpaceBar(
-                            background:homeCubit.searchResultsCount > 0 ? Image.asset(
-                              homeCubit.currentTabIndex == 0
-                                  ? AppString.coverImage
-                                  : homeCubit.currentTabIndex == 1
-                                      ? AppString.planetsImage
-                                      : homeCubit.currentTabIndex == 2
-                                          ? AppString.filmsImage
-                                          : homeCubit.currentTabIndex == 3
-                                              ? AppString.speciesImage
-                                              : homeCubit.currentTabIndex == 4
-                                                  ? AppString.vehiclesImage
-                                                  : AppString.starshipsImage,
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                            ) : null,
+        return Stack(
+          alignment: Alignment.center,
+          children: [
+            Scaffold(
+              extendBody: true,
+              body: Column(
+                children: [
+                  const SizedBox(height: 10),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: SearchBox(txtSearchController: Global.txtSearchController,
+                      onChanged: (String value ) {
+                      homeCubit.getSearchResults();
+                    },),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only( right: 20,top : 20,left: 20,),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text('Results'),
+                        Text('(${homeCubit.searchResultsCount.toString()})', style: const TextStyle(color: Colors.blue),),
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  Expanded(
+                    child: NestedScrollView(
+                      headerSliverBuilder: (context, innerBoxIsScrolled) {
+                        return [
+                          SliverOverlapAbsorber(
+                            handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
+                                context),
+                            sliver: SliverAppBar(
+                              automaticallyImplyLeading: false,
+                              expandedHeight: 150.0,
+                              flexibleSpace: FlexibleSpaceBar(
+                                background:homeCubit.searchResultsCount > 0 ? Image.asset(
+                                  homeCubit.currentTabIndex == 0
+                                      ? AppString.coverImage
+                                      : homeCubit.currentTabIndex == 1
+                                          ? AppString.planetsImage
+                                          : homeCubit.currentTabIndex == 2
+                                              ? AppString.filmsImage
+                                              : homeCubit.currentTabIndex == 3
+                                                  ? AppString.speciesImage
+                                                  : homeCubit.currentTabIndex == 4
+                                                      ? AppString.vehiclesImage
+                                                      : AppString.starshipsImage,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                ) : null,
+                              ),
+                            ),
                           ),
-                        ),
+                        ];
+                      },
+                      body: TabBarView(
+                        physics: const NeverScrollableScrollPhysics(),
+                        // Disable swipe to change tabs
+                        children: [
+                          buildCategoryTab(context, AppString.character),
+                          buildCategoryTab(context, AppString.planets),
+                          buildCategoryTab(context, AppString.films),
+                          buildCategoryTab(context, AppString.species),
+                          buildCategoryTab(context, AppString.vehicles),
+                          buildCategoryTab(context, AppString.starships),
+                        ],
                       ),
-                    ];
-                  },
-                  body: TabBarView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    // Disable swipe to change tabs
-                    children: [
-                      buildCategoryTab(context, AppString.character),
-                      buildCategoryTab(context, AppString.planets),
-                      buildCategoryTab(context, AppString.films),
-                      buildCategoryTab(context, AppString.species),
-                      buildCategoryTab(context, AppString.vehicles),
-                      buildCategoryTab(context, AppString.starships),
-                    ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            if (Global.isListening)
+              const Positioned(
+
+                child: CircleAvatar(
+                  backgroundColor: Colors.blue,
+                  radius: 50,
+                  child: Icon(
+                    Icons.mic,
+                    color: Colors.red,
+                    size: 50.0,
                   ),
                 ),
               ),
-            ],
-          ),
+          ],
         );
       },
     );
