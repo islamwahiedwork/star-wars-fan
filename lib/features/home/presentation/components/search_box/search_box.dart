@@ -32,8 +32,15 @@ class _SearchBoxState extends State<SearchBox> {
   void _listen() async {
     if (!Global.isListening) {
       bool available = await _speech.initialize(
-        onStatus: (val) => print('onStatus: $val'),
-        onError: (val) => print('onError: $val'),
+        onStatus: (val) {
+
+        },
+        onError: (val) {
+          setState(() {
+             Global.isListening = false;
+             HomeCubit.get(context).emit(RefreshDataSearchResultsCountSuccessState());
+          });
+        },
       );
       if (available) {
         setState(() {
@@ -92,6 +99,7 @@ class _SearchBoxState extends State<SearchBox> {
                     setState(() {
                       widget.txtSearchController.clear();
                       widget.showClearIcon = false;
+                      Global.isListening = false;
                     });
                     widget.onChanged!('');
                   },
